@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from "react";
-import Drawing from "react-drawing";
+import React from "react";
+import { ReactPainter } from "react-painter";
 
-const WINDOW_WIDTH = window.innerWidth;
-const WINDOW_HEIGHT = window.innerHeight;
+const HALF = 2;
 
-export default function DrawingBoard() {
-  const [canvas, setCanvas] = useState({
-    width: WINDOW_WIDTH,
-    height: WINDOW_HEIGHT,
-  });
+const HALF_WINDOW_LENGTH = {
+  height: window.innerHeight / HALF,
+  width: window.innerWidth / HALF,
+};
 
-  function handleResize() {
-    return setCanvas({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  }
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-  }, []);
-
+function DrawingBoard() {
   return (
-    <div className="vh-100 my-3 border">
-      <Drawing height={canvas.height} width={canvas.width} />
+    <div className="border">
+      <ReactPainter
+        height={HALF_WINDOW_LENGTH.height}
+        width={HALF_WINDOW_LENGTH.width}
+      />
     </div>
   );
 }
+
+export default DrawingBoard;

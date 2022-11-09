@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Home() {
+function Home() {
   const navigate = useNavigate();
   const [isHost, setIsHost] = useState(false);
 
@@ -66,3 +66,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
