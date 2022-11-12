@@ -4,37 +4,34 @@ function Info() {
   const [showRoomId, setShowRoomId] = useState(false);
   const roomId = "HELLO";
 
-  const handleShowRoomId = useCallback(({ target }) => {
-    if (target.checked) {
-      setShowRoomId(true);
-    } else {
-      setShowRoomId(false);
-    }
-  }, []);
+  const handleClick = useCallback(() => {
+    setShowRoomId(!showRoomId);
+  }, [showRoomId]);
 
   return (
-    <div className="d-flex flex-column">
+    <div className="d-flex flex-column gap-1">
       <label className="form-label h2 text-center" htmlFor="room_id">
         ROOM ID
-        <input
-          className="form-control"
-          id="room_id"
-          readOnly
-          type={showRoomId ? "text" : "password"}
-          value={roomId}
-        />
-      </label>
-      <div className="mb-3 form-check">
-        <label className="form-check-label" htmlFor="show_room_id">
+        <div className="input-group">
           <input
-            className="form-check-input"
-            id="show_room_id"
-            onChange={handleShowRoomId}
-            type="checkbox"
+            aria-describedby="show_room_id"
+            aria-label="show_room_id"
+            className="form-control"
+            id="room_id"
+            readOnly
+            type={showRoomId ? "text" : "password"}
+            value={roomId}
           />
-          Show Room ID
-        </label>
-      </div>
+          <button
+            className="input-group-text"
+            id="show_room_id"
+            onClick={handleClick}
+            type="button"
+          >
+            <i className={`bi ${showRoomId ? "bi-eye-slash" : "bi-eye"}`} />
+          </button>
+        </div>
+      </label>
     </div>
   );
 }
