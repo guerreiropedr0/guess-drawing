@@ -1,44 +1,36 @@
-import React, { useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useCallback, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { SocketContext } from '../context/SocketContext.jsx';
 
 function Home() {
   const navigate = useNavigate();
-  const [isHost, setIsHost] = useState(false);
-
-  const handleHost = useCallback(
-    (boolean) => () => {
-      setIsHost(boolean);
-    },
-    []
-  );
+  const { socket } = useContext(SocketContext);
 
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      navigate("/game");
+
+      const { username, roomId } = event.target.elements;
+
+      socket.emit(
+        'join-room',
+        roomId.value,
+        {
+          name: username.value,
+          id: socket.id,
+          score: 0,
+        },
+        () => {
+          navigate('/game');
+        },
+      );
     },
-    [navigate]
+    [navigate],
   );
 
   return (
     <div className="container mt-3">
-      <div className="d-flex gap-3 mb-3">
-        <button
-          className={isHost ? "btn btn-primary" : "btn btn-secondary"}
-          onClick={handleHost(true)}
-          type="button"
-        >
-          HOST
-        </button>
-        <button
-          className={isHost ? "btn btn-secondary" : "btn btn-primary"}
-          onClick={handleHost(false)}
-          type="button"
-        >
-          JOIN
-        </button>
-      </div>
-
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-3">
           <input
@@ -49,18 +41,16 @@ function Home() {
           />
         </div>
 
-        {!isHost && (
-          <div className="form-group mb-3">
-            <input
-              className="form-control"
-              id="room_id"
-              placeholder="Room ID"
-              type="text"
-            />
-          </div>
-        )}
+        <div className="form-group mb-3">
+          <input
+            className="form-control"
+            id="roomId"
+            placeholder="Room ID"
+            type="text"
+          />
+        </div>
         <button className="btn btn-primary" type="submit">
-          {isHost ? "Create" : "Join"} Room
+          Join Room
         </button>
       </form>
     </div>

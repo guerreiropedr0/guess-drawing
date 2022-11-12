@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const cardWidth = {
-  width: "300px",
+  width: '300px',
 };
 
 function UserScore({ user }) {
@@ -13,13 +13,13 @@ function UserScore({ user }) {
           <img
             alt={`${user.name} avatar`}
             className="img-fluid rounded-start"
-            src={user.imageSrc}
+            src={`https://avatars.dicebear.com/api/bottts/${user.id}.svg`}
           />
         </div>
         <div className="col-md-8">
           <div className="card-body d-flex justify-content-between align-items-center">
             <h5 className="card-title">{user.name}</h5>
-            <span className="badge bg-dark">{user.points}</span>
+            <span className="badge bg-dark">{user.score}</span>
           </div>
         </div>
       </div>
@@ -29,9 +29,9 @@ function UserScore({ user }) {
 
 UserScore.propTypes = {
   user: PropTypes.shape({
-    imageSrc: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    points: PropTypes.number.isRequired,
+    score: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
 };
 
