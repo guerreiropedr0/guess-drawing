@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Home from './pages/Home.jsx';
 import Game from './pages/Game.jsx';
-import ErrorHandler from './pages/ErrorHandler.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
 
 import { SocketProvider } from './context/SocketContext.jsx';
 
@@ -10,7 +10,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
-    errorElement: <ErrorHandler />,
+    errorElement: <ErrorPage />,
   },
   {
     path: '/game',

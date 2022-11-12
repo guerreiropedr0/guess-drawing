@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 
-function Info() {
+function LobbyInfo() {
   const [showRoomId, setShowRoomId] = useState(false);
   const roomId = "HELLO";
 
@@ -36,4 +36,4 @@ function Info() {
   );
 }
 
-export default Info;
+export default LobbyInfo;
