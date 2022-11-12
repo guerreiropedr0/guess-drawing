@@ -5,9 +5,13 @@ const cardWidth = {
   width: '300px',
 };
 
-function UserScore({ user }) {
+function UserScore({ user, active, me }) {
   return (
-    <div className="card mb-3 text-dark" style={cardWidth}>
+    <div
+      className={`card mb-3 text-dark ${
+        active ? 'border border-4 border-success' : ''
+      } ${me ? 'opacity-100' : 'opacity-75'}`}
+      style={cardWidth}>
       <div className="row g-0 align-items-center">
         <div className="col-md-4">
           <img
